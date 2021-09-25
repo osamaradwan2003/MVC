@@ -3,6 +3,7 @@
 
 namespace Src\Bootstrap;
 
+use Src\Session\Session;
 
 class App{
 
@@ -10,7 +11,9 @@ class App{
   private function __constract(){}
 
   public static function run(){
-    echo "hello";
+    Session::set('name', 'osama');
+
+    #echo Session::flash('name');
   }
 
 

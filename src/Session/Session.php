@@ -24,6 +24,7 @@ class Session{
    */
 
   public static function start(){
+    ini_set('session.use_only_cookies', 1);
     if (! session_id()){
       session_start();
     }
@@ -37,7 +38,7 @@ class Session{
    * @return void
    */
 
-  public function set($key, $val){
+  public static function set($key, $val){
     $_SESSION[$key] = $val;
   }
 
@@ -104,7 +105,20 @@ class Session{
    */
 
   public static function destory(){
-    session_destroy();
+    foreach($_SESSION as $key => $value){
+      unset($_SESSION[$key]);
+    }
+  }
+
+
+  /**
+   * all function using to return all $_SESSION
+   * 
+   * @return array
+   */
+
+  public static function all(){
+    return $_SESSION;
   }
 
 

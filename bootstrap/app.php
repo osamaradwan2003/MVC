@@ -16,7 +16,6 @@ class Application{
 
     define("DS", DIRECTORY_SEPARATOR);
 
-
     App::run();
 
   }
