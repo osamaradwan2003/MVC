@@ -11,9 +11,8 @@ class App{
   private function __constract(){}
 
   public static function run(){
-    Session::set('name', 'osama');
+    Session::start();
 
-    #echo Session::flash('name');
   }
 
 

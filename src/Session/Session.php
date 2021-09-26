@@ -3,9 +3,8 @@
 
 namespace Src\Session;
 
-
 /**
- * description: session class to mange a sessions in freamworl
+ * description: session class to manage a sessions in framework
  * 
  * @package Session
  * @author osamaradwan
@@ -14,10 +13,8 @@ namespace Src\Session;
 
 class Session{
 
-  private function __constract(){}
-
-  /**
-   * Session start function to start sessinn if not stared
+    /**
+   * Session start function to start session if not stared
    * 
    * 
    * @return void
@@ -31,14 +28,14 @@ class Session{
   }
 
   /**
-   * set function useing to push key and value to session
+   * set function using to push key and value to session
    * 
    * @param string $key
-   * @param any $val
+   * @param  $val
    * @return void
    */
 
-  public static function set($key, $val){
+  public static function set(string $key, $val){
     $_SESSION[$key] = $val;
   }
 
@@ -50,19 +47,20 @@ class Session{
    * @return bool
    */
 
-  public static function has($key){
-    return isset($_SESSION[$key]) ? true : false;
+  public static function has(string $key): bool
+  {
+    return isset($_SESSION[$key]);
   }
 
-  /**
-   * get function using to get value form $_SESSION if isset
-   * 
-   * @param string $key;
-   * 
-   * @return any;
-   */
+    /**
+     * get function using to get value form $_SESSION if isset
+     *
+     * @param string $key ;
+     *
+     * @return mixed;
+     */
 
-  public static function get($key){
+   public static function get(string $key): mixed{
     if (self::has($key)){
       return $_SESSION[$key];
     }
@@ -70,26 +68,27 @@ class Session{
   }
 
   /**
-   * remove function usig to remove value from $_SESSION using key 
+   * remove function using to remove value from $_SESSION using key
    * 
    * @param string $key
    * @return void
    */
 
-  public static function remove($key){
+  public static function remove(string $key){
     if (self::has($key)){
       unset($_SESSION[$key]);
     }
   }
 
-  /**
-   * flash function using to get vlaue if isset and remove it or return null
-   * 
-   * @param string $key
-   * @return value
-   */
+    /**
+     * flash function using to get value if isset and remove it or return null
+     *
+     * @param string $key
+     * @return mixed
+     */
 
-  public static function flash($key){
+  public static function flash(string $key): mixed
+  {
     $value = null;
     if(self::has($key)){
       $value = self::get($key);
@@ -99,16 +98,16 @@ class Session{
   }
 
   /**
-   * destroy function using to remove all vlaues in $_SESSION
-   * 
+   * destroy function using to remove all values in $_SESSION
+   *
    * @return void
    */
 
-  public static function destory(){
+  public static function destroy(){
     foreach($_SESSION as $key => $value){
-      unset($_SESSION[$key]);
+        unset($_SESSION[$key]);
     }
-  }
+}
 
 
   /**
@@ -117,7 +116,7 @@ class Session{
    * @return array
    */
 
-  public static function all(){
+  public static function all(): array{
     return $_SESSION;
   }
 

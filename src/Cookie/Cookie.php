@@ -21,21 +21,22 @@ class Cookie{
    * set function useing to push key and value to session
    * 
    * @param string $key
-   * @param any $val
+   * @param mixed $val
    * @param float $expire
    * @param string $path
    * @param string $domain
+   * @param bool $secure
    * @param bool $http_only
    * @return void
    */
 
-  public static function set($key, $val, $expire, $path, $domain, $secure,$http_only){
+  public static function set(string $key, mixed $val, float $expire, string $path, string $domain, bool $secure, bool $http_only){
     $expire = $expire ?? time() + (1*365*24*60*60);
     $path = $path ?? '/';
     $domain = $domain ?? '';
     $secure = $secure ?? false;
     $http_only = $http_only ?? true;
-    setcookie($key, $value, $expire, $path, $domain, $secure, $http_only);
+    setcookie($key, $val, $expire, $path, $domain, $secure, $http_only);
   }
 
 
@@ -46,19 +47,21 @@ class Cookie{
    * @return bool
    */
 
-  public static function has($key){
-    return isset($_COOKIE[$key]) ? true : false;
+  public static function has(string $key): bool
+  {
+    return isset($_COOKIE[$key]);
   }
 
   /**
    * get function using to get value form $_COOKIE if isset
-   * 
-   * @param string $key;
-   * 
-   * @return any;
+   *
+   * @param string $key ;
+   *
+   * @return mixed;
    */
 
-  public static function get($key){
+  public static function get(string $key) :mixed
+  {
     if (self::has($key)){
       return $_COOKIE[$key];
     }
@@ -99,7 +102,8 @@ class Cookie{
    * @return array
    */
 
-  public static function all(){
+  public static function all(): array
+  {
     return $_COOKIE;
   }
 
