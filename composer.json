@@ -3,10 +3,14 @@
     "autoload": {
         "psr-4": {
             "Src\\": "./src",
-            "App\\": "./"
+            "App\\": "./App"
         }
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.6"
+    },
+    "require": {
+        "jenssegers/blade": "^1.4",
+        "filp/whoops": "^2.14"
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use Src\http\Request;
+use Src\Http\Response;
 
 /**
  * Template File Doc Comment
@@ -13,15 +15,20 @@
  * @link     http://localhost/
  */
 
-use Mvc\app\Router;
+use Src\Route\Route;
+use Src\View\View;
 
-Router::GET("/", "hello");
+
+Route::Get("/", function ($req, $res){
+  return View::render('user.home', ['title'=>'home']);
+});
 
 
-Router::GET(
-    "/users/{id}/{name}",
-    function ($req, $res) {
+Route::middleware("CheckLogin", function (){
+  Route::Get('/users/{id}/{name}/profile', 'UserController@login');
+});
 
-        return "id";
-    }
-);
+Route::Post('/users/{id}/{name}/signup', function(Request $req,Response $res){
+  return [$req->id, $req->name];
+});
+
