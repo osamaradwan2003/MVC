@@ -24,6 +24,7 @@
 
     public static function bladeRender($path, $data=[]): string
     {
+
       $blade = new Blade(File::makePath( 'App' . File::ds() . 'Views'), File::makePath('storage/cash'));
       return $blade->make($path, $data)->render();
     }

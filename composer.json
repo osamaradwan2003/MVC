@@ -11,6 +11,7 @@
     },
     "require": {
         "jenssegers/blade": "^1.4",
-        "filp/whoops": "^2.14"
+        "filp/whoops": "^2.14",
+      "ext-http": "*"
     }
 }

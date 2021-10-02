@@ -4,8 +4,10 @@
 namespace Src\Cookie;
 
 
+use JetBrains\PhpStorm\Pure;
+
 /**
- * description: session class to mange a sessions in freamworl
+ * description: session class to manage a sessions in framework
  * 
  * @package Cookie
  * @author osamaradwan
@@ -14,11 +16,8 @@ namespace Src\Cookie;
 
 class Cookie{
 
-  private function __constract(){}
-
-
   /**
-   * set function useing to push key and value to session
+   * set function using to push key and value to session
    * 
    * @param string $key
    * @param mixed $val
@@ -60,7 +59,7 @@ class Cookie{
    * @return mixed;
    */
 
-  public static function get(string $key) :mixed
+  #[Pure] public static function get(string $key) :mixed
   {
     if (self::has($key)){
       return $_COOKIE[$key];
@@ -69,13 +68,13 @@ class Cookie{
   }
 
   /**
-   * remove function usig to remove value from $_COOKIE using key 
+   * remove function using to remove value from $_COOKIE using key
    * 
    * @param string $key
    * @return void
    */
 
-  public static function remove($key){
+  public static function remove(string $key){
     if (self::has($key)){
       unset($_COOKIE[$key]);
       setcookie($key, null, -1);
@@ -84,12 +83,12 @@ class Cookie{
 
 
   /**
-   * destroy function using to remove all vlaues in $_COOKIE
+   * destroy function using to remove all values in $_COOKIE
    * 
    * @return void
    */
 
-  public static function destory(){
+  public static function destroy(){
     foreach($_COOKIE as $key => $value){
       unset($_COOKIE[$key]);
     }

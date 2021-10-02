@@ -4,7 +4,18 @@
 </head>
 <body>
 
-    <h1>{{$title}}</h1>
+    @foreach($items as $key => $value)
+        {{ $value->id  }} : {{ $value->name  }}
+        <br>
+
+    @endforeach
+
+    <div>
+      <?php echo \Src\Database\Database::get_links(pages_num: $pageCount); ?>
+    </div>
+
+
+
 
 
 </body>

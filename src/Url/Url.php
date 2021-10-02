@@ -2,17 +2,18 @@
 
   namespace Src\Url;
 
+  use JetBrains\PhpStorm\Pure;
   use Src\Http\Request;
   use Src\Http\Server;
 
   class Url
   {
-      public static function getPath($path): string
+      #[Pure] public static function getPath($path): string
       {
         return Request::getBaseUrl() . $path;
       }
 
-      public static function previous(): string
+      #[Pure] public static function previous(): string
       {
         return Request::previous();
       }

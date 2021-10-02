@@ -3,6 +3,8 @@
 
 namespace Src\Session;
 
+use JetBrains\PhpStorm\Pure;
+
 /**
  * description: session class to manage a sessions in framework
  * 
@@ -60,7 +62,7 @@ class Session{
      * @return mixed;
      */
 
-   public static function get(string $key): mixed{
+   #[Pure] public static function get(string $key): mixed{
     if (self::has($key)){
       return $_SESSION[$key];
     }

@@ -3,6 +3,7 @@
 
 namespace Src\Bootstrap;
 
+use ReflectionException;
 use Src\File\File;
 use Src\Http\Request;
 use Src\Http\Response;
@@ -13,13 +14,11 @@ use Src\Exception\Exceptions;
 class App{
 
 
-  private function __constract(){}
-
-
   /**
-   * @throws \ReflectionException
+   * @throws ReflectionException
    */
   public static function run(){
+
     Exceptions::handle();
     Session::start();
 

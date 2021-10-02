@@ -2,7 +2,10 @@
 
   namespace Src\Route;
 
-  use http\Exception\BadMethodCallException;
+  use BadFunctionCallException;
+  use BadMethodCallException;
+  use InvalidArgumentException;
+  use ReflectionException;
   use Src\Http\Response;
   use Src\Http\Request;
 
@@ -14,7 +17,7 @@
      */
     private static array $_routes = [];
     /**
-     * @var string
+     * @var array
      */
 
     private static array $_routes_with_params = [];
@@ -120,7 +123,7 @@
       if (is_callable($callback)) {
         call_user_func($callback);
       } else {
-        throw new \BadFunctionCallException('Pleas Insert Valid Callback');
+        throw new BadFunctionCallException('Pleas Insert Valid Callback');
       }
       self::$_prefix = $parent_prefix;
     }
@@ -141,14 +144,14 @@
       if (is_callable($callback)) {
         call_user_func($callback);
       } else {
-        throw new \BadFunctionCallException('Pleas Insert Valid Callback');
+        throw new BadFunctionCallException('Pleas Insert Valid Callback');
       }
       self::$_middleware = $parent_middle;
     }
 
 
     /**
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public static function handle(): mixed
     {
@@ -181,7 +184,7 @@
 
 
     /**
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     private static function invoke(mixed $route, array $params=[], array $params_name=[])
     {
@@ -205,22 +208,22 @@
           if (method_exists($controller, $method)) {
             return call_user_func_array([new $controller, $method], [$req, $res]);
           } else {
-            throw new \BadMethodCallException('Please insert method ' . $method . ' into controller: ' .
+            throw new BadMethodCallException('Please insert method ' . $method . ' into controller: ' .
               $controller);
           }
 
         } else {
-          throw new \ReflectionException('Controller Class: ' . $controller . ' is Not Found');
+          throw new ReflectionException('Controller Class: ' . $controller . ' is Not Found');
         }
       } elseif (is_string($callback)) {
         return $callback;
       } else {
-        throw new \InvalidArgumentException('Please Pass Valid Callback or Method or String');
+        throw new InvalidArgumentException('Please Pass Valid Callback or Method or String');
       }
     }
 
     /**
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     private static function execute_middleware($middleware, $req, $res)
     {
@@ -231,7 +234,7 @@
           if (class_exists($class)) {
             call_user_func_array([new $class, 'handle'], [$req, $res]);
           } else {
-            throw new \ReflectionException('Middleware Class: ' . $class . ' is Not Found');
+            throw new ReflectionException('Middleware Class: ' . $class . ' is Not Found');
           }
         }
       }
